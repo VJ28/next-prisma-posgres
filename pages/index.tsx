@@ -1,59 +1,23 @@
 import React from "react"
-import { GetStaticProps } from "next"
-import Layout from "../components/Layout"
-import Post, { PostProps } from "../components/Post"
+import Link from "next/link"
 
-export const getStaticProps: GetStaticProps = async () => {
-  const feed = [
-    {
-      id: "1",
-      title: "Prisma is the perfect ORM for Next.js",
-      content: "[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!",
-      published: false,
-      author: {
-        name: "Nikolas Burk",
-        email: "burk@prisma.io",
-      },
-    },
-  ]
-  return { 
-    props: { feed }, 
-    revalidate: 10 
-  }
-}
-
-type Props = {
-  feed: PostProps[]
-}
-
-const Blog: React.FC<Props> = (props) => {
+const Blog: React.FC = (props) => {
   return (
-    <Layout>
-      <div className="page">
-        <h1>Public Feed</h1>
-        <main>
-          {props.feed.map((post) => (
-            <div key={post.id} className="post">
-              <Post post={post} />
-            </div>
-          ))}
-        </main>
-      </div>
-      <style jsx>{`
-        .post {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .post:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
-        }
-      `}</style>
-    </Layout>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <h1 className="mb-6 text-3xl font-bold text-gray-800">Welcome to My App</h1>
+    <div className="space-y-4">
+      <Link href="/onboard">
+        <button className="w-full rounded-md bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+          Sign Up
+        </button>
+      </Link>
+      <Link href="/login">
+        <button className="w-full rounded-md bg-gray-500 px-4 py-2 text-white transition-colors hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300">
+          Login
+        </button>
+      </Link>
+    </div>
+  </div>
   )
 }
 
